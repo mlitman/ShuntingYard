@@ -1,9 +1,10 @@
-#include "LinkedList.hpp"
+#include "Queue.hpp"
+#include <iostream>
+
+using namespace std;
 
 class StringFactory
 {
-    private:
-
     public:
-        static string* split(string s, string delims);
+        static Queue* split(string s, string delims);
 };
