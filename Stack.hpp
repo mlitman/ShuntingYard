@@ -17,5 +17,4 @@ class Stack
         int getCount();
         void display();
 };
-
 #endif
