@@ -1,11 +1,36 @@
 #include "StringFactory.hpp"
 
+bool StringFactory::isInString(string searchString, char charToFind)
+{
+    for(int i = 0; i < searchString.length(); i++)
+    {
+        if(searchString[i] == charToFind)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 Queue* StringFactory::split(string s, string delims)
 {
-    cout << "write your code here \n";
-    /*
-    update split to return a Queue of strings that will represent our
-    input queue for shunting yard.  This will require you to implement
-    a Queue data structure that supports enqueue and dequeue
-    */
+    //string s = "123+42-8*2";
+    //string ops = "+-*/";
+    Queue* answerQ = new Queue();
+    string temp = "";
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(isInString(delims, s[i]))
+        {
+            answerQ->enqueue(temp);
+            answerQ->enqueue((string)"" + s[i]);
+            temp = "";
+        }
+        else
+        {
+            temp = temp + s[i];
+        }
+    }
+    answerQ->enqueue(temp);
+    return answerQ;
 }
