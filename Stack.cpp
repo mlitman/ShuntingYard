@@ -28,6 +28,11 @@ void Stack::push(string s)
     this->count++;
 }
 
+bool Stack::isEmpty()
+{
+    return this->count == 0;
+}
+
 string Stack::pop()
 {
     if(this->top)
@@ -36,6 +41,7 @@ string Stack::pop()
         this->top = this->top->getNextNode();
         string payload2Return = temp->getPayload();
         delete temp;
+        this->count--;
         return payload2Return;
     }
     return 0;

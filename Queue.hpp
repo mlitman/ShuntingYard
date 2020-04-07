@@ -14,5 +14,6 @@ class Queue
         string dequeue();
         void display();
         int getCount();
+        bool isEmpty();
 };
 #endif

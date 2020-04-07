@@ -7,6 +7,11 @@ Queue::Queue()
     this->count = 0;
 }
 
+bool Queue::isEmpty()
+{
+    return this->count == 0;
+}
+
 void Queue::display()
 {
     Node* currNode = this->head;

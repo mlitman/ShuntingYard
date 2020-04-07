@@ -15,6 +15,7 @@ class Stack
         string pop();
         string peek();
         int getCount();
+        bool isEmpty();
         void display();
 };
 #endif
