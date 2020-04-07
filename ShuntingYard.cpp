@@ -56,7 +56,70 @@ ShuntingYard::ShuntingYard(string expression, string delimiters)
     {
         outputQ->enqueue(opStack->pop());
     }
-    outputQ->display();
+    
+    //do the math
+    Stack* mathStack = new Stack();
+    while(!outputQ->isEmpty())
+    {
+        temp = outputQ->dequeue();
+        if(this->isOperator(temp))
+        {
+            int num1 = this->stringToInt(mathStack->pop());
+            int num0 = this->stringToInt(mathStack->pop());
+            int answer = this->doMath(temp[0], num0, num1);
+            mathStack->push((to_string(answer)));
+        }
+        else
+        {
+            mathStack->push(temp);
+        }
+    }
+    cout << mathStack->peek() << "\n";
+}
+
+int ShuntingYard::doMath(char op, int num0, int num1)
+{
+    if(op == '+')
+    {
+        return num0 + num1;
+    }
+    else if(op == '-')
+    {
+        return num0 - num1;
+    }
+    else if(op == '*')
+    {
+        return num0 * num1;
+    }
+    else if(op == '/')
+    {
+        return num0 / num1;
+    }
+}
+
+int ShuntingYard::indexOf(string s, char c)
+{
+    for(int i = 0; i < s.length(); i++)
+    {
+        if(s[i] == c)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int ShuntingYard::stringToInt(string num)
+{
+    int sum = 0;
+    string theNumbers = "0123456789";
+    int place = 1;
+    for(int i = num.length()-1; i >= 0; i--)
+    {
+        sum += (place * this->indexOf(theNumbers, num[i]));
+        place *= 10;
+    }
+    return sum;
 }
 
 int ShuntingYard::getOpPower(string op)
